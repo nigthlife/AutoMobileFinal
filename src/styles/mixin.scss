@@ -1,0 +1,29 @@
+// 定义可复用的清除浮动函数
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+// 定义可复用的样式块
+@mixin scrollBar {
+  &::-webkit-scrollbar-track-piece {
+    background: #d3dce6;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #99a9bf;
+    border-radius: 20px;
+  }
+}
+// 定义可复用的样式块
+@mixin relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
