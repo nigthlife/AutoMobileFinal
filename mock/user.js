@@ -29,9 +29,10 @@ module.exports = [
     url: '/vue-admin-template/user/login',
     type: 'post',
     response: config => {
+      
       const { username } = config.body
       const token = tokens[username]
-
+      console.log(config)
       // mock error
       if (!token) {
         return {

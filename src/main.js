@@ -25,12 +25,12 @@ import '@/permission' // permission control 权限控制
  */
 // 判断生成环境是否等于 production
 // 将node的环境更改为生成环境
-if (process.env.NODE_ENV === 'production') {
-  console.log(process.env.NODE_ENV)
-  // 导入mock 随机生成数据
-  const { mockXHR } = require('../mock')
-  mockXHR()
-}
+// if (process.env.NODE_ENV === 'production') {
+//   console.log(process.env.NODE_ENV)
+//   // 导入mock 随机生成数据
+//   const { mockXHR } = require('../mock')
+//   mockXHR()
+// }
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
@@ -46,5 +46,5 @@ new Vue({
   render: h => h(App)
 })
 
-console.log(process.env.NODE_ENV)
-console.log(process.env)
+// console.log(process.env.NODE_ENV)
+// console.log(process.env)

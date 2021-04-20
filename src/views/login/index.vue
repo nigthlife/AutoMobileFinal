@@ -46,10 +46,11 @@
         </span>
       </el-form-item>
 
-      <el-button 
-          :loading="loading" 
-          type="primary" style="width:100%;margin-bottom:30px;" 
-          @click.native.prevent="handleLogin">登录</el-button>
+      <el-button
+        :loading="loading"
+        type="primary"
+        style="width:100%;margin-bottom:30px;"
+        @click.native.prevent="handleLogin">登录</el-button>
 
       <!-- 小贴士 -->
       <div class="tips">
@@ -68,16 +69,17 @@ export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-
       // 判断用户输入框是否为空
       if (!validUsername(value)) {
-        // 弹出一个错误信息
+      // 弹出一个错误信息
         callback(new Error('Please enter the correct user name'))
       } else {
+        // 弹出一个空消息框
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
+      // 判断密码长度是否大于3
       if (value.length < 3) {
         callback(new Error('The password can not be less than 6 digits'))
       } else {
@@ -87,23 +89,23 @@ export default {
     return {
       // 登录表单
       loginForm: {
-        username: 'admin',
-        password: '111111'
-        // username: 's001',
-        // password: '1234'
+        // username: 'admin',
+        // password: '111111'
+        username: 'lsp',
+        password: '6666'
       },
-      // trigger： 触发
+      // trigger： 触发焦点事件
       // required：必需
       // validator：验证器
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
-      // 
+      //
       loading: false,
       // 密码类型
       passwordType: 'password',
-      redirect: ''
+      redirect: undefined
     }
   },
   watch: {
@@ -111,13 +113,16 @@ export default {
     $route: {
       // 处理器
       handler: function(route) {
+        
+        // alert(route.query.redirect)
         this.redirect = route.query && route.query.redirect
+        // alert(this.redirect)
       },
       immediate: true
     }
   },
   methods: {
-    // 显示密码
+  // 显示密码
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -131,16 +136,15 @@ export default {
     // 登录验证
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
-        // valid是否为空
-        // console.log(valid)
-        
-        if (true) {
+      // valid是否为空
+      // console.log(valid)
+        if (valid) {
           this.loading = true
           // 使用用户模块中的login异步跳转到登录页面
           this.$store.dispatch('user/login', this.loginForm).then(() => {
-  
             // 重定向到页面
-            this.$router.push({ path: this.redirect || '/' })
+            this.$router.replace({ path: this.redirect || '/' }, () => {})
+            // this.$router.push('/')
             // this.$router.push({ path: '/example' })
             this.loading = false
           }).catch(() => {

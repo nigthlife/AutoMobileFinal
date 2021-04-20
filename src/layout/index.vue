@@ -34,6 +34,11 @@ import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
   name: 'Layout',
+  data() {
+    return {
+      
+    }
+  },
   // 注册组件
   components: {
     Navbar,
